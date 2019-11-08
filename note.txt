@@ -1,0 +1,14 @@
+{{ $receipt->staff->name }}
+{{ $receipt->client->name }}
+
+<?php
+class receipt {
+    public function staff()
+    {
+        return $this->belongTo('App\Model\User', 'staff_id');
+    }
+    public function client()
+    {
+        return $this->belongTo('App\Model\User', 'client_id');
+    }
+}

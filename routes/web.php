@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('blank');
 });
@@ -19,7 +21,6 @@ Route::get('client', function () {
     return view('client.client-add');
 });
 
-Route::get('/client-edit/{id}', 'ClientsController@getEdit');
 
 Route::get('client-add', 'ClientsController@getAdd');
 // Route::post('/store', 'ClientsController@postAdd')->name('store.post');
@@ -35,3 +36,11 @@ Route::get('client-search', function () {
 Route::get('create', 'ClientsController@create')->name('create.post');
 Route::post('/store', 'ClientsController@store')->name('store.post');
 Route::post('/update/{id}', 'ClientsController@update')->name('update.post');
+
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+
+Route::middleware('auth')->group(function() {
+    Route::get('/client-edit/{id}', 'ClientsController@getEdit');
+});

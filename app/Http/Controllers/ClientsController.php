@@ -13,12 +13,15 @@ class ClientsController extends Controller
 
     public function __construct(Client $model)
     {
+        if(!Auth::check() && Auth::user()->level<3) {
+            abort(403);
+        }
         $this->model = $model;
     }
 
     // public function getAdd() {
     //     return view('client.client-add');
-    // }
+    // }   @if(Auth::user()->level >3) Xoá @endif
 
     public function store(Request $request) {
         $phone      = $request->input('phone');
